@@ -58,21 +58,30 @@ window.addEventListener('mouseup', e => {
     }
 });
 cvs.addEventListener('touchstart', e => {
-    x = e.touches[0].clientX;
-    y = e.touches[0].clientY;
+    var rect = e.target.getBoundingClientRect();
+    var xx = e.targetTouches[0].pageX - rect.left;
+    var yy = e.targetTouches[0].pageY - rect.top;
+    x = xx;
+    y = yy;
   });
   
 cvs.addEventListener('touchmove', e => {
-      drawLine(ctx, x, y, e.touches[0].clientX, e.touches[0].clientY, "black");
-      emitLine(x, y, e.touches[0].clientX, e.touches[0].clientY, "gray");
-      x = e.touches[0].clientX;
-      y = e.touches[0].clientY;
+      var rect = e.target.getBoundingClientRect();
+      var xx = e.targetTouches[0].pageX - rect.left;
+      var yy = e.targetTouches[0].pageY - rect.top;
+      drawLine(ctx, x, y, xx, yy, "black");
+      emitLine(x, y, xx, yy, "gray");
+      x = xx;
+      y = yy;
   }); 
 window.addEventListener('touchend', e => {
-      drawLine(ctx, x, y, e.touches[0].clientX, e.touches[0].clientY, "black");
-      emitLine(x, y, e.touches[0].clientX, e.touches[0].clientY, "gray");
-      x = 0;
-      y = 0;
+      var rect = e.target.getBoundingClientRect();
+      var xx = e.targetTouches[0].pageX - rect.left;
+      var yy = e.targetTouches[0].pageY - rect.top;
+      drawLine(ctx, x, y, xx, yy, "black");
+      emitLine(x, y, xx, yy, "gray");
+      x = null;
+      y = null;
 });
 }
 function drawLine(context, x1, y1, x2, y2, color) {
