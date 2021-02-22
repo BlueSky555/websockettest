@@ -52,8 +52,8 @@ window.addEventListener('mouseup', e => {
     if (isDrawing == true) {
       drawLine(ctx, x, y, e.offsetX, e.offsetY, "black");
       emitLine(x, y, e.offsetX, e.offsetY, "gray");
-      x = 0;
-      y = 0;
+      x = null;
+      y = null;
       isDrawing = false;
     }
 });
