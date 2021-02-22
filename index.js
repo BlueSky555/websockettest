@@ -43,7 +43,7 @@ cvs.addEventListener('mousedown', e => {
 cvs.addEventListener('mousemove', e => {
     if (isDrawing == true) {
       drawLine(ctx, x, y, e.offsetX, e.offsetY, "black");
-      emitLine(x, y, e.offsetX, e.offsetY, "blue");
+      emitLine(x, y, e.offsetX, e.offsetY, "gray");
       x = e.offsetX;
       y = e.offsetY;
     }
@@ -51,7 +51,7 @@ cvs.addEventListener('mousemove', e => {
 window.addEventListener('mouseup', e => {
     if (isDrawing == true) {
       drawLine(ctx, x, y, e.offsetX, e.offsetY, "black");
-      emitLine(x, y, e.offsetX, e.offsetY, "blue");
+      emitLine(x, y, e.offsetX, e.offsetY, "gray");
       x = 0;
       y = 0;
       isDrawing = false;
