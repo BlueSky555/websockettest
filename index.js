@@ -58,23 +58,23 @@ window.addEventListener('mouseup', e => {
     }
 });
 cvs.addEventListener('touchstart', e => {
-    var xx = e.targetTouches[0].pageX - cvs.style.left;
-    var yy = e.targetTouches[0].pageY - cvs.style.top;
+    var xx = e.touches[0].clientX - cvs.style.left;
+    var yy = e.touches[0].clientY - cvs.style.top;
     x = xx;
     y = yy;
   });
   
 cvs.addEventListener('touchmove', e => {
-      var xx = e.targetTouches[0].pageX - cvs.style.left;
-      var yy = e.targetTouches[0].pageY - cvs.style.top;
+      var xx = e.touches[0].clientX - cvs.style.left;
+      var yy = e.touches[0].clientY - cvs.style.top;
       drawLine(ctx, x, y, xx, yy, "black");
       emitLine(x, y, xx, yy, "gray");
       x = xx;
       y = yy;
   }); 
 window.addEventListener('touchend', e => {
-      var xx = e.targetTouches[0].pageX - cvs.style.left;
-      var yy = e.targetTouches[0].pageY - cvs.style.top;
+      var xx = e.touches[0].clientX - cvs.style.left;
+      var yy = e.touches[0].clientY - cvs.style.top;
       drawLine(ctx, x, y, xx, yy, "black");
       emitLine(x, y, xx, yy, "gray");
       x = null;
