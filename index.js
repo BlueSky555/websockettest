@@ -58,19 +58,19 @@ window.addEventListener('mouseup', e => {
     }
 });
 cvs.addEventListener('touchstart', e => {
-    x = e.offsetX;
-    y = e.offsetY;
+    x = e.touches[0].clientX;
+    y = e.touches[0].clientY;
   });
   
 cvs.addEventListener('touchmove', e => {
-      drawLine(ctx, x, y, e.offsetX, e.offsetY, "black");
-      emitLine(x, y, e.offsetX, e.offsetY, "gray");
-      x = e.offsetX;
-      y = e.offsetY;
+      drawLine(ctx, x, y, e.touches[0].clientX, e.touches[0].clientY, "black");
+      emitLine(x, y, e.touches[0].clientX, e.touches[0].clientY, "gray");
+      x = e.touches[0].clientX;
+      y = e.touches[0].clientY;
   }); 
 window.addEventListener('touchend', e => {
-      drawLine(ctx, x, y, e.offsetX, e.offsetY, "black");
-      emitLine(x, y, e.offsetX, e.offsetY, "gray");
+      drawLine(ctx, x, y, e.touches[0].clientX, e.touches[0].clientY, "black");
+      emitLine(x, y, e.touches[0].clientX, e.touches[0].clientY, "gray");
       x = 0;
       y = 0;
 });
