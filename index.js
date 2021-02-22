@@ -57,6 +57,29 @@ window.addEventListener('mouseup', e => {
       isDrawing = false;
     }
 });
+cvs.addEventListener('touchstart', e => {
+    x = e.offsetX;
+    y = e.offsetY;
+    isDrawing = true;
+  });
+  
+cvs.addEventListener('touchmove', e => {
+    if (isDrawing == true) {
+      drawLine(ctx, x, y, e.offsetX, e.offsetY, "black");
+      emitLine(x, y, e.offsetX, e.offsetY, "gray");
+      x = e.offsetX;
+      y = e.offsetY;
+    }
+  }); 
+window.addEventListener('touchend', e => {
+    if (isDrawing == true) {
+      drawLine(ctx, x, y, e.offsetX, e.offsetY, "black");
+      emitLine(x, y, e.offsetX, e.offsetY, "gray");
+      x = 0;
+      y = 0;
+      isDrawing = false;
+    }
+});
 }
 function drawLine(context, x1, y1, x2, y2, color) {
     context.beginPath();
