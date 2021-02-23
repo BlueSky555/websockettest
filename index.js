@@ -3,6 +3,7 @@ let cvs = document.querySelector('#cvs')
 let ctx = cvs.getContext("2d")
 let x, y;
 let isDrawing = false;
+var rightDown = false;
 let myHue = Math.floor(Math.random() * 360)
 var w = window.innerWidth;
 var h = window.innerHeight;
@@ -38,25 +39,27 @@ function startDrawing(){
 cvs.addEventListener('mousedown', e => {
     x = e.offsetX;
     y = e.offsetY;
+    rightDown = true;
     isDrawing = true;
   });
   
 cvs.addEventListener('mousemove', e => {
     if (isDrawing == true) {
-      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, " + e.button == 2 ? "white" : "50%" + ")");
-      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, " + e.button == 2 ? "white" : "75%" + ")");
+      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, " + (rightDown ? "100%" : "50%") + ")");
+      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, " + (rightDown ? "100%" : "75%") + ")");
       x = e.offsetX;
       y = e.offsetY;
     }
   }); 
 window.addEventListener('mouseup', e => {
     if (isDrawing == true) {
-      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, " + e.button == 2 ? "white" : "50%" + ")");
-      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, " + e.button == 2 ? "white" : "75%" + ")");
+      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, " + (rightDown ? "100%" : "50%") + ")");
+      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, " + (rightDown ? "100%" : "75%") + ")");
       x = null;
       y = null;
       isDrawing = false;
     }
+    if(e.button == 2){rightDown = false;}
 });
 cvs.addEventListener('touchstart', e => {
     var rect = cvs.getBoundingClientRect();
@@ -87,6 +90,7 @@ window.addEventListener('touchend', e => {
 }
 function drawLine(context, x1, y1, x2, y2, color) {
     context.beginPath();
+    let oldColor = context.strokeStyle;
     context.strokeStyle = color;
     context.lineCap = "round";
     context.lineWidth = cvs.height / 120;
@@ -94,6 +98,7 @@ function drawLine(context, x1, y1, x2, y2, color) {
     context.lineTo(x2, y2);
     context.stroke();
     context.closePath();
+    context.strokeStyle = oldColor;
   }
   function emitLine(x1, y1, x2, y2, color){
       var message = {
