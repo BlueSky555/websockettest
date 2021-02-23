@@ -43,16 +43,16 @@ cvs.addEventListener('mousedown', e => {
   
 cvs.addEventListener('mousemove', e => {
     if (isDrawing == true) {
-      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 50%)");
-      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 75%)");
+      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, " + e.button == 2 ? "white" : "50%" + ")");
+      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, " + e.button == 2 ? "white" : "75%" + ")");
       x = e.offsetX;
       y = e.offsetY;
     }
   }); 
 window.addEventListener('mouseup', e => {
     if (isDrawing == true) {
-      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 50%)");
-      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 75%)");
+      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, " + e.button == 2 ? "white" : "50%" + ")");
+      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, " + e.button == 2 ? "white" : "75%" + ")");
       x = null;
       y = null;
       isDrawing = false;
