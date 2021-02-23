@@ -59,25 +59,28 @@ window.addEventListener('mouseup', e => {
     }
 });
 cvs.addEventListener('touchstart', e => {
-    var xx = e.touches[0].clientX - cvs.style.left;
-    var yy = e.touches[0].clientY - cvs.style.top;
+    var rect = cvs.getBoundingClientRect();
+    var xx = e.touches[0].clientX - rect.left;
+    var yy = e.touches[0].clientY - rect.top;
     x = xx;
     y = yy;
   });
   
 cvs.addEventListener('touchmove', e => {
-      var xx = e.touches[0].clientX - cvs.style.left;
-      var yy = e.touches[0].clientY - cvs.style.top;
-      drawLine(ctx, x, y, xx, yy, "black");
-      emitLine(x, y, xx, yy, "gray");
+      var rect = cvs.getBoundingClientRect();
+      var xx = e.touches[0].clientX - rect.left;
+      var yy = e.touches[0].clientY - rect.top;
+      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 50%)");
+      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 75%)");
       x = xx;
       y = yy;
   }); 
 window.addEventListener('touchend', e => {
-      var xx = e.touches[0].clientX - cvs.style.left;
-      var yy = e.touches[0].clientY - cvs.style.top;
-      drawLine(ctx, x, y, xx, yy, "black");
-      emitLine(x, y, xx, yy, "gray");
+      var rect = cvs.getBoundingClientRect();
+      var xx = e.touches[0].clientX - rect.left;
+      var yy = e.touches[0].clientY - rect.top;
+      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 50%)");
+      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 75%)");
       x = null;
       y = null;
 });
