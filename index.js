@@ -3,6 +3,7 @@ let cvs = document.querySelector('#cvs')
 let ctx = cvs.getContext("2d")
 let x, y;
 let isDrawing = false;
+let myHue = Math.floor(Math.random() * 360)
 var w = window.innerWidth;
 var h = window.innerHeight;
 if(w > h){
@@ -42,16 +43,16 @@ cvs.addEventListener('mousedown', e => {
   
 cvs.addEventListener('mousemove', e => {
     if (isDrawing == true) {
-      drawLine(ctx, x, y, e.offsetX, e.offsetY, "black");
-      emitLine(x, y, e.offsetX, e.offsetY, "gray");
+      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 50%)");
+      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 75%)");
       x = e.offsetX;
       y = e.offsetY;
     }
   }); 
 window.addEventListener('mouseup', e => {
     if (isDrawing == true) {
-      drawLine(ctx, x, y, e.offsetX, e.offsetY, "black");
-      emitLine(x, y, e.offsetX, e.offsetY, "gray");
+      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 50%)");
+      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 75%)");
       x = null;
       y = null;
       isDrawing = false;
