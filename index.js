@@ -39,7 +39,7 @@ function startDrawing(){
 cvs.addEventListener('mousedown', e => {
     x = e.offsetX;
     y = e.offsetY;
-    rightDown = true;
+    if(e.button == 2){rightDown = true;}
     isDrawing = true;
   });
   
