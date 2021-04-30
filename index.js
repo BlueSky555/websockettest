@@ -24,7 +24,7 @@ connection.onmessage = event => {
         keepServerAlive()
     }
     if(message.item == "draw"){
-        drawLine(ctx, message.x1 * cvs.width, message.y1 * cvs.height, message.x2 *cvs.width, message.y2 * cvs.height, message.color)
+        drawLine(ctx, message.x1 * cvs.width, message.y1 * cvs.height, message.x2 * cvs.width, message.y2 * cvs.height, message.color)
     }
 }
 function keepServerAlive(){
@@ -63,16 +63,16 @@ window.addEventListener('mouseup', e => {
 });
 cvs.addEventListener('touchstart', e => {
     var rect = cvs.getBoundingClientRect();
-    var xx = e.touches[0].clientX - rect.left;
-    var yy = e.touches[0].clientY - rect.top;
+    var xx = e.changedTouches[0].clientX - rect.left;
+    var yy = e.changedTouches[0].clientY - rect.top;
     x = xx;
     y = yy;
   });
   
 cvs.addEventListener('touchmove', e => {
       var rect = cvs.getBoundingClientRect();
-      var xx = e.touches[0].clientX - rect.left;
-      var yy = e.touches[0].clientY - rect.top;
+      var xx = e.changedTouches[0].clientX - rect.left;
+      var yy = e.changedTouches[0].clientY - rect.top;
       drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 50%)");
       emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 75%)");
       x = xx;
@@ -80,8 +80,8 @@ cvs.addEventListener('touchmove', e => {
   }); 
 window.addEventListener('touchend', e => {
       var rect = cvs.getBoundingClientRect();
-      var xx = e.touches[0].clientX - rect.left;
-      var yy = e.touches[0].clientY - rect.top;
+      var xx = e.changedTouches[0].clientX - rect.left;
+      var yy = e.changedTouches[0].clientY - rect.top;
       drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 50%)");
       emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 75%)");
       x = null;
