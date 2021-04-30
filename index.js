@@ -1,4 +1,4 @@
-window.onload = ()=>{
+window.onload = () => {
 let cvs = document.querySelector('#cvs')
 let ctx = cvs.getContext("2d")
 let x, y;
@@ -73,8 +73,8 @@ cvs.addEventListener('touchmove', e => {
       var rect = cvs.getBoundingClientRect();
       var xx = e.changedTouches[0].clientX - rect.left;
       var yy = e.changedTouches[0].clientY - rect.top;
-      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 50%)");
-      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 75%)");
+      drawLine(ctx, x, y, xx, yy, "hsl("+ myHue +", 100%, 50%)");
+      emitLine(x, y, xx, yy, "hsl("+ myHue +", 100%, 75%)");
       x = xx;
       y = yy;
   }); 
@@ -82,8 +82,8 @@ window.addEventListener('touchend', e => {
       var rect = cvs.getBoundingClientRect();
       var xx = e.changedTouches[0].clientX - rect.left;
       var yy = e.changedTouches[0].clientY - rect.top;
-      drawLine(ctx, x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 50%)");
-      emitLine(x, y, e.offsetX, e.offsetY, "hsl("+ myHue +", 100%, 75%)");
+      drawLine(ctx, x, y, xx, yy, "hsl("+ myHue +", 100%, 50%)");
+      emitLine(x, y, xx, yy, "hsl("+ myHue +", 100%, 75%)");
       x = null;
       y = null;
 });
